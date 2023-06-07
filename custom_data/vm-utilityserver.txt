@@ -1,0 +1,17 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+ - docker.io
+ - mysql-client
+runcmd: 
+  - sudo docker pull certbot/certbot:latest
+
+
+# Database set up SQL file
+write_files:
+- encoding: b64
+  content: Q1JFQVRFIERBVEFCQVNFIElGIE5PVCBFWElTVFMgY3RmZDsKQ1JFQVRFIERBVEFCQVNFIElGIE5PVCBFWElTVFMgZ3VhY2Ftb2xlZGI7CgpDUkVBVEUgVVNFUiBJRiBOT1QgRVhJU1RTICdndWFjZGJ1c2VyJyBJREVOVElGSUVEIEJZICdndWFjZGJwYXNzd29yZCc7CkNSRUFURSBVU0VSIElGIE5PVCBFWElTVFMgJ2N0ZmRkYnVzZXInIElERU5USUZJRUQgQlkgJ2N0ZmRkYnBhc3N3b3JkJzsKCkdSQU5UIEFMTCBQUklWSUxFR0VTIE9OIGN0ZmQuKiBUTyAnY3RmZGRidXNlcidAJyUnOwpHUkFOVCBBTEwgUFJJVklMRUdFUyBPTiBndWFjYW1vbGVkYi4qIFRPICdndWFjZGJ1c2VyJ0AnJSc7CgpGTFVTSCBQUklWSUxFR0VTOwo=
+  owner: root:root
+  path: /root/db-initialise.sql
+  permissions: '0644'
